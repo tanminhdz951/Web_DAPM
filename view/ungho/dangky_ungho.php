@@ -21,12 +21,16 @@ session_start();
       $conn = new mysqli("localhost","root","","quanlylulut");
       $sql1 = "SELECT * from hangcuutro";
       $result1 = $conn->query($sql1);
+
      
-       $a = $result1 -> num_rows ;
+      $a = $result1 -> num_rows ;
+
+      if(isset( $_SESSION['name'])){
       $user = $_SESSION['name'];
       $sql2 = "SELECT * from nguoiungho where tenTaiKhoan = '$user'";
       $result2 = mysqli_query($db,$sql2);
       $row2 = mysqli_fetch_array($result2);
+      }
 
 
 
@@ -57,9 +61,7 @@ session_start();
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="../nguoidung/asset/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../nguoidung/css/style.css" rel="stylesheet">
+
  
 
  
@@ -67,51 +69,9 @@ session_start();
 
 <body style="background-color: #c3e8f8;;" >
 
-    <nav >
-        <!--<div class="header1"> -->
-        <div class="logo">
-            <img src="../nguoidung/images/dnlogo.png" alt="Logo Image">
-        </div>
-        <div class="hamburger" style="text-align: center;width:auto;">
-            <h5  style="color: red;font-size:15px;font-weight:bold;width:180px;">SỨ MỆNH ĐẶC BIỆT<br></h5>
-            <h6>ỦNG HỘ LŨ LỤT</h6>
+<?php include('../header-footer/header.php') ?>
 
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Giới thiệu</a></li>
-            <li><a href="#">Tin tức</a></li>
-            <li><a href="#">Hoạt động</a></li>
-            <?php  
-                if (isset($_SESSION['name'])) {
-                   ?> <li>
-                    <a class="login-button" href="view/nguoidung/nguoidung.php" style="padding: 5px 15px;border-radius:2px;" >
-                        <?php 
-                            echo $_SESSION['full_hoten'];
-                        ?>
-                    </a>
-                   </li> 
-                   <?php
-                }
-                else{
-                    ?>
-                        <li><a class="login-button" href="view/login/login.php">Sign In</a> </li>
-                    <?php
-                }
-            ?>
-        </ul>
-        <div class="find" >
 
-            <ul>
-                <li>Đà Nẵng - thứ, ngày, tháng ,năm</li>
-            </ul>
-            <input class="search" type="text" placeholder="Search here">
-            <a class="tk"><i class="fas fa-search-location"></i></a>
-        </div>
-
-    </nav>
-
-  </header><!-- #header -->
 
   <main id="main" style="padding: 20px;">
     
@@ -124,12 +84,12 @@ session_start();
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
+      <div class="container" >
 
         <div class="row gy-4" style="display: flex;">
 
         <div class="contai" style="width:50%">
-        <div class="than" style="margin: 0px;">
+        <div class="than" style="margin: 0px; height:auto ">
             <div class="inf" style="margin: 0px; font-size:14px;">
            
                 <ul>
@@ -152,7 +112,15 @@ session_start();
            
            
             <div class="nhap" style="font-size:14px;">
-            <form action="dangky.php" method="POST">
+            <form action="
+                <?php if(isset($_SESSION['name'])){
+                           echo "dangky.php";
+                            }
+                            else{
+                              echo "form_dangki.php";
+                            }
+                        ?>"
+              method="POST">
                 <ul >
                     <li><input class="dien" type="text" name="idotcuutro" value="<?php echo $idDotCuuTro ?>" style="display:none;"/>
                     <li><input style="text-align: left;" class="dien" type="text" name="name" value="<?php
@@ -161,6 +129,7 @@ session_start();
                     }
                     ?>"/>
                     <br></li>
+                    
                     <?php 
                     $i = 0;
                           while ($row1 = $result1->fetch_assoc()) 
@@ -175,21 +144,14 @@ session_start();
                               <select class="dien" type="text" name="<?php
                                   echo 'idhang'.$i;
                               ?>" style="width:50%; margin-left:5%"> 
-                              <?php 
-                               if(isset($_SESSION['name'])){
-                                ?>
-                                <option value="<?php echo $row1['idHangCuuTro'] ?>"><?php  echo $row1['tenHangCuuTro']; echo' '; echo $row1['donViTinh']; ?></option>
-                                <?php
-                               
-                                }
-                                ?>
+                                <option value="<?php echo $row1['idHangCuuTro'] ?>"><?php  echo $row1['tenHangCuuTro']; echo' '; echo $row1['donViTinh']; ?>
+                              </option>
                                 </select>
                                 <br>
                               </div>
                             </li>
                             <?php
                           }
-
                             ?> 
                     <li><input class="dien" type="text" name="sodienthoai" value="<?php
                       if(isset($_SESSION['name'])){
@@ -241,28 +203,7 @@ session_start();
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top" style="margin-top: 0px;">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 footer-info">
-            <p>Cứu trợ, nhịp cầu nối liền những trái tim</p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <ul>
-              <li><a href="#"><i class="fa fa-phone" >Hotline: 0363907251</i></a></li>
-              
-            </ul>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-      
-  </footer><!-- End Footer -->
+  <?php include('../header-footer/footer.php') ?>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

@@ -35,50 +35,7 @@
 </head>
 
 <body style="width: 100%;">
-    <nav>
-        <!--<div class="header1"> -->
-        <div class="logo">
-            <img src="../nguoidung//images/dnlogo.png" alt="Logo Image">
-        </div>
-        <div class="hamburger" style="text-align: center;width:auto;">
-            <h5 style="color: red;font-weight:bold;font-size:16px;">SỨ MỆNH ĐẶC BIỆT<br></h5>
-            <h6>ỦNG HỘ LŨ LỤT</h6>
-            
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.php">Trang chủ</a></li>
-            <li><a href="#">Giới thiệu</a></li>
-            <li><a href="#">Tin tức</a></li>
-            <li><a href="#">Hoạt động </a></li>
-            <?php  
-                if (isset($_SESSION['name'])) {
-                   ?> <li>
-                    <a class="login-button" href="view/nguoidung/nguoidung.php">
-                        <?php 
-                            echo $_SESSION['full_hoten'];
-                        ?>
-                    </a>
-                   </li> 
-                   <?php
-                }
-                else{
-                    ?>
-                        <li><a class="login-button" href="view/login/login.php">Sign In</a> </li>
-                    <?php
-                }
-            ?>
-
-            
-        </ul>
-            <div class="find">
-   
-                <ul>
-                    <li>Đà Nẵng - thứ, ngày, tháng ,năm</li>
-                </ul>
-                <input class="search" type="text" placeholder="Search here">
-                <a class="tk"><i class="fas fa-search-location"></i></a>
-            </div>
-    </nav> 
+<?php include('../header-footer/header.php') ?>
 
 
     <div class="container" style="width:100%">
@@ -125,37 +82,7 @@
         </div>
     </div>
 
-
-    <footer class="footer" style="height:auto ;">
-        <div class="col1">
-            <div>
-                <br>
-                <img id="logo-img" src="https://sos24h.vn/wwwroot/resources/upload/img/productcategory/8-2020/logo2.png" alt="logo" width="70" height="70"><br>
-            </div>
-        </div>
-        <div class="col2">
-            <ul>
-                <li><a href="">Đăng kí ủng hộ</a></li>
-                <li><a href="">Danh sách ủng hộ</a></li>
-            </ul>
-        </div>
-        <div class="col3">
-            <ul>
-                <li><a>Đại học sư phạm kĩ thuật Đà Nẵng</a></li>
-                <li><a>Địa chỉ: 48 Cao Thắng Hải Châu Đà Nẵng</a></li>
-                <li><a>Email: Dinhvuong98@gmail.com</a></li>
-                <li><a>SDT: 0763726790</a></li>
-            </ul>
-        </div>
-        <div class="col4">
-            <ul>
-                <img src="https://sos24h.vn/wwwroot/resources/upload/img/productcategory/8-2020/logo2.png" alt="" width="120" height="120">
-
-
-            </ul>
-        </div>
-    </footer>
-
+    <?php include('../header-footer/footer.php') ?>
 </body>
 <!-- <script src="view/js/slide.js"></script> -->
 

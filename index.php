@@ -32,71 +32,156 @@
     <!-- Modernizer js -->
     <script src="view/nguoidung/js/modernizr.custom.js"></script>
     <style>
-        .login-list{
-            /* position: absolute; */
-            margin: 0 300px 0 0 !important;
-            background: #000;
-            width: 50px;
+        /* ul.nav-lg */
+        #login-dx {
+            position: absolute;
+            display: none !important;
+            width: 170px;
+            height: 50px;
+            z-index: 10;
+            background: #FFFFFF;
             min-height: auto;
-            display: none ;
+            color: red;
+        }
+        #login-dx a{
+            color: #808080;
+        }
+        #login-dx a:hover{
+            color: #000;
+        }
 
+        #button-login:hover #login-dx {
+            display: block !important;
+        }
+
+        .navbar-list {
+            position: absolute;
+            background: #FFFFFF;
+            width: 250px;
+            height: auto;
+            color: #000 !important;
+            min-height: auto;
+            display: none !important;
+            z-index: 10;
+            box-shadow: #808080;
             /* border-style: groove; */
         }
 
-        .button-login:hover .login-list li a{
+        .navbar-item:hover .navbar-list {
             display: block !important;
+
+        }
+
+        .navbar-item>a:hover {
             color: #000;
+        }
+
+        .navbar-item .navbar-list li a {
+            color: #C0C0C0;
+        }
+
+        .navbar-item .navbar-list li a:hover {
+            color: #000;
+        }
+
+        .navbar-item .navbar-list b {
+            color: #808080;
+            margin-bottom: 5px;
+            font-size: 18px;
+            /* margin-left: 5px; */
+
+        }
+
+        .sub-item a {
+            color: #DDDDDD !important;
+        }
+
+        .sub-item a:hover {
+            color: #000 !important;
         }
     </style>
 </head>
-<body style="width:100%">
-   <nav>
+
+<body>
+    <nav>
         <!--<div class="header1"> -->
         <div class="logo">
-            <img src="view/nguoidung//images/dnlogo.png" alt="Logo Image">
+            <img src="view/nguoidung/images/dnlogo.png" alt="Logo Image">
         </div>
-        <div class="hamburger" style="text-align: center;width:200px;">
+        <div class="hamburger" style="text-align: center;width:auto;">
             <h5 style="color: red;font-weight:bold;font-size:16px;">SỨ MỆNH ĐẶC BIỆT<br></h5>
             <h6>ỦNG HỘ LŨ LỤT</h6>
-            
+
         </div>
-        <ul class="nav-links" style="text-align: center;">
-            <li><a href="index.php">Trang chủ</a></li>
-            <li><a href="view/gioithieu/gioithieu.php">Giới thiệu</a></li>
-            <li><a href="view/tintuc/tintuc.php">Tin tức</a></li>
-            <li><a href="#">Hoạt động </a></li>
-            <?php  
-                if (isset($_SESSION['name'])) {
-                   ?> <li class="button-login" style="position: relative;">
+        <ul id="nav-lg" class="nav-links">
+            <li class="navbar-item"><a href="index.php">Trang chủ</a></li>
+            <li class="navbar-item"><a href="view/gioithieu/gioithieu.php">Giới thiệu</a></li>
+            <li class="navbar-item"><a href="view/tintuc/tintuc.php">Tin tức</a></li>
+            <li class="navbar-item"><a href="#">Hoạt động </a>
+            <ul class="navbar-list" style="width:350px;margin-left:-50%;">
+                    <!-- <div class="navbar-ds" style="display: flex;"> -->
+                    <table>
+                        <tr>
+                            <th class="sub-item"><a href="view/ungho/danhsach_ungho.php">Đăng kí ủng hộ</a></th> 
+                        </tr>
+                        <tr>
+                            <th class="sub-item"><a href="view/hogiadinh/hogiadinh.php">Danh sách cần cứu trợ</a></th>                         
+                        </tr>
+                        <tr>
+                            <th class="sub-item"><a href="view/nguoidung/danhsach_nguoidung.php">Danh sách người ủng hộ</a></th>   
+                        </tr>
+                    </table>
+
+                    <!-- </div> -->
+                </ul>
+            </li>
+            <?php
+            if (isset($_SESSION['name'])) {
+            ?> 
+            <li id="button-login" style="position: relative;">
                     <a class="login-button" href="view/nguoidung/nguoidung.php">
-                        <?php 
-                            echo $_SESSION['full_hoten'];
+                        <?php
+                        echo $_SESSION['full_hoten'];
                         ?>
                     </a>
-                        <ul class="login-list">
-                            <li><a href="view/login/login.php">Đăng xuất</a></li>
-                        </ul>
-                   </li> 
-                   <?php
-                }
-                else{
-                    ?>
-                        <li class="button-login"><a class="login-button" href="view/login/login.php">Sign In</a> </li>
-                    <?php
-                }
+                    
+                    <ul id="login-dx" style="height:auto">
+                        <table style="margin-top: 5px;">
+                            <tr>
+                                <th><a href="view/nguoidung/nguoidung.php">Tài khoản</a></th>
+                            </tr>
+                            <tr>
+                                <th><a href="view/nguoidung/lichsuungho.php">Lịch sử ủng hộ</a></th>
+                            </tr>
+                            <tr>
+                                <th><a href="view/login/login.php">Quên mật khẩu</a></th>
+                            </tr>
+                            <tr>
+                                <th><a href="view/login/logout.php">Đăng xuất</a></th>
+                            </tr>
+                        </table>
+                    </ul> 
+                    
+                </li>
+            <?php
+            } else {
+            ?>
+                <li class="button-login"><a class="login-button" href="view/login/login.php">Sign In</a> </li>
+            <?php
+            }
             ?>
 
-            
+
         </ul>
-            <div class="find" style="width:100%">
+        <div class="find" style="width:100%">
    
-                <ul>
-                    <li>Đà Nẵng - <?php date_default_timezone_set('Asia/Ho_Chi_Minh'); $date = getdate(); echo $date['weekday'].", "; echo date('d/m/Y - H:i'); ?></li>
-                </ul>
-                <input class="search" type="text" placeholder="Search here">
+            <ul style="width:100%">
+                <li style="width:auto;margin-left:50%;float:right;">Đà Nẵng - <?php date_default_timezone_set('Asia/Ho_Chi_Minh'); $date = getdate(); echo $date['weekday'].", "; echo date('d/m/Y - H:i'); ?></li>
+            </ul>
+            <input class="search" type="text" placeholder="Search here" style="width:30%">
                 <a class="tk"><i class="fas fa-search-location"></i></a>
-            </div>
-    </nav> 
+        </div>
+    </nav>
 
 
     <div class="container" style="width:100%">
@@ -182,7 +267,7 @@
         </div>
         <div class="col4">
             <ul>
-                <img src="view/nguoidung//images/dnlogo.png" alt="" width="120" height="120">
+                <img src="view/nguoidung//images/dnlogo.png" alt="" width="120" height="120" style="margin-left: 40%;">
 
 
             </ul>
